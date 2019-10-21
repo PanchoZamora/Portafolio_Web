@@ -27,7 +27,7 @@
         <hr>
         <div class="container bootstrap snippet">
             <div class="row">
-                <div class="col-sm-10"><h1>Nombre de usuario</h1></div><br>
+                <div class="col-sm-10"><h1>Usuario: ${sessionScope.nombreUsuario}&nbsp;${sessionScope.apellidoUsuario}</h1></div><br>
                 <div class="col-sm-2"><a href="index.jsp" class="pull-right"><img title="Restauramte Siglo XXI" class="img-circle img-responsive" src="img/icono.png" height="50" width="60"></a></div>
             </div>
             <div class="row">
@@ -36,8 +36,10 @@
                       <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                       <h6>Subir nueva foto...</h6>
                       <input type="file" class="text-center center-block file-upload">
-                    </div></hr><br><br>
-                    <a href="index.jsp" class="pull-left">Volver</a>
+                    </div></hr><br>
+                    <a href="salirServlet" class="pull-left">Cerrar sesion</a>
+                    <br><br>
+                    <a href="index.jsp" class="pull-left">Volver al inicio</a>
                 </div><!--/col-3-->
                 
                 <div class="col-sm-9">

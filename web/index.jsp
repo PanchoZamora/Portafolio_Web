@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link rel="icon" href="img/icono.png">
         <link rel="stylesheet" href="css/carousel.css"> 
-        <link rel="stylesheet" href="css/signin.css">
         <link rel="stylesheet" href="css/estilos.css">
     </head>
 <!-- NAVBAR
@@ -42,47 +41,22 @@
                 <li><a href="#seccion3">Ubicacion</a></li>
                 <li><a href="#seccion4">Contacto</a></li>
               </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="perfil.jsp" >Perfil</a></li>
-                </ul>    
-                <a href="#iniciar" class="btn btn-default navbar-btn navbar-right btn-primary" data-toggle="modal">
-                    Mi cuenta <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                </a>
+              <c:choose>
+                  <c:when test="${sessionScope.correoUsuario == null}">
+                    <a href="crearUsuario.jsp" class="btn btn-default navbar-btn navbar-right btn-primary">
+                        Mi cuenta <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </a>
+                  </c:when>
+                  <c:otherwise>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="perfil.jsp" >Perfil</a></li>
+                    </ul>
+                  </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </nav>
       </div>
-    </div>
-    <!-- Iniciar Sesion -->
-    <div class="modal fade " id="iniciar">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 style="text-align: center">Iniciar sesion</h3>
-                </div>
-                <div class="modal-body">
-                    <form class="form-signin">
-                        <label for="inputEmail" class="sr-only">Correo Electronico</label>
-                        <input type="email" id="inputEmail" class="form-control" placeholder="Correo Electronico" required autofocus>
-                        <br>
-                        <label for="inputPassword" class="sr-only">Contraseña</label>
-                        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="remember-me"> Recuerdame
-                          </label>
-                        </div>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
-                    </form>
-                    <br>
-                    <a href="crearUsuario.jsp" >Crear una cuenta</a>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal"> Cancelar</button>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- Carousel
     ================================================== -->
@@ -101,7 +75,14 @@
               <div class="carousel-caption">
                 <h1>Example headline.</h1>
                 <p>Note: If you're viewing this page via a, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-                <p><a class="btn btn-lg btn-success" href="#iniciar" data-toggle="modal">Reservar</a></p>
+                <c:choose>
+                    <c:when test="${sessionScope.correoUsuario == null}">
+                        <p><a class="btn btn-lg btn-success" href="crearUsuario.jsp" >Reservar</a></p>
+                    </c:when>
+                    <c:otherwise>
+                        <p><a class="btn btn-lg btn-success" href="reserva.jsp" >Reservar</a></p>
+                    </c:otherwise>
+                </c:choose>
               </div>
             </div>
           </div>
@@ -176,13 +157,20 @@
         
         <div class="seccion" id="seccion2">
             <div class="row featurette">
-              <div class="col-md-5">
+              <div class="col-md-5" style=" margin-top:85px;">
                 <img class="featurette-image img-responsive center-block" src="img/ambientes-llenos-de-lujo.jpg" alt="Ambiente de lujo" style="margin-left: 10px;">
               </div>
-              <div class="col-md-6">
+                <div class="col-md-6">
                 <h2 class="featurette-heading">Restaurante del Siglo XXI<br><small> A tu medida</small></h2>
                 <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                <p><a class="btn btn-lg btn-success col-md-offset-4" href="reserva.jsp">Reservar</a></p>
+                <c:choose>
+                    <c:when test="${sessionScope.correoUsuario == null}">
+                        <p><a class="btn btn-lg btn-success" href="crearUsuario.jsp" >Reservar</a></p>
+                    </c:when>
+                    <c:otherwise>
+                        <p><a class="btn btn-lg btn-success" href="reserva.jsp" >Reservar</a></p>
+                    </c:otherwise>
+                </c:choose>
               </div>
             </div>
         </div>
@@ -195,7 +183,7 @@
                 <h2 class="featurette-heading">Nos ubicamos en Las Condes<br><small>Linneo 1358,Las Condes,Santiago</small></h2>
                 <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-5" style=" margin-top:85px;">
                   <img class="featurette-image img-responsive center-block" src="img/ubicacion.JPG" alt="Generic placeholder image">
               </div>
             </div>

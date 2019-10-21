@@ -10,7 +10,9 @@ import Entidades.Usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,5 +51,34 @@ public class UsuarioImplementacion implements IUsuario{
     public void modificarUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Usuario verificarUsuario(String correo, String clave) {
+        Usuario usuario = null;
+        try{
+        String query = "select * from usuario where correo=? and contrasena=? ";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1,correo);
+        stmt.setString(2,clave);
+        ResultSet rs=stmt.executeQuery();
+            if (rs.next()){
+                usuario.setCorreo(rs.getString("correo"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioImplementacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usuario;
+    }
     
+    private static Usuario mapeo(ResultSet resultSet) throws SQLException, ParseException {
+        Usuario usuario = new Usuario();
+        usuario.setCorreo(resultSet.getString("correo"));
+        usuario.setNombre(resultSet.getString("nombre"));
+        usuario.setApellido(resultSet.getString("apellidos"));
+        usuario.setRut(resultSet.getString("rut"));
+        usuario.setContrasena(resultSet.getString("contrasena"));
+        return usuario;
+    }
 }

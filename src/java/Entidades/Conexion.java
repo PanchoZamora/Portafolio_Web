@@ -27,7 +27,7 @@ public class Conexion {
     public Connection conectarBD() throws Exception {
         try{
         Class.forName("oracle.jdbc.OracleDriver");
-        String BaseDeDatos = "jdbc:oracle:thin:@192.168.191.138:1521:orcl";
+        String BaseDeDatos = "jdbc:oracle:thin:@192.168.16.129:1521:orcl";
         conexion= DriverManager.getConnection(BaseDeDatos,"portafolio","portafolio");
         }
         catch(ClassNotFoundException | SQLException e)
