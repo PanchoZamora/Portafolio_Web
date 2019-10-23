@@ -6,6 +6,8 @@
 package Servlets;
 
 import Daos.*;
+import Entidades.Cliente;
+import Entidades.Mesa;
 import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,19 +41,29 @@ public class loginServlet extends HttpServlet {
         String correo=request.getParameter("correo");
         String contrasena=request.getParameter("contrasena");
         IUsuario usuarioDAO = null;
+        IReserva reservaDAO = null;
         try {
             usuarioDAO = new UsuarioImplementacion();
+            reservaDAO = new ReservaImplementacion();
             
         } catch (Exception ex) {
             Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         Usuario user = usuarioDAO.buscarUsuario(correo, contrasena);
         if(user != null){
+            Cliente cliente = usuarioDAO.datosCliente(user.getIdUsuario());
+            session.setAttribute("idUsuario", user.getIdUsuario());
             session.setAttribute("correoUsuario", user.getCorreo());
             session.setAttribute("nombreUsuario", user.getNombre());
             session.setAttribute("apellidoUsuario", user.getApellido());
+            session.setAttribute("fonoCliente", cliente.getFono());
+            session.setAttribute("idCliente", cliente.getIdCliente());
             session.setAttribute("rutUsuario", user.getRut());
             session.setAttribute("claveUsuario", user.getContrasena());
+            List<Mesa> mesasDisponibles = reservaDAO.mesasDisponibles();
+            if(mesasDisponibles != null){
+                session.setAttribute("mesasDisponibles",mesasDisponibles);
+            }
             response.sendRedirect("index.jsp");
         }else{
             out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");

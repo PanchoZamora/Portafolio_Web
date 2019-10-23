@@ -55,6 +55,11 @@ $(function() {
       nombre: "required",
       apellido: "required",
       rut: "required",
+      fono: {
+          required: true,
+          minlength: 9,
+          maxlength: 9
+      },
       correo: {
         required: true,
         email: true
@@ -69,6 +74,11 @@ $(function() {
       nombre: "Por favor ingrese su nombre",
       apellido: "Por favor ingrese su apellido",
       rut: "Por favor ingrese su rut",
+      fono: {
+          required: "Por favor ingrese su fono",
+          minlength: "El fono debe tener 9 caracteres",
+          maxlength: "El fono debe tener 9 caracteres"
+      },
       contrasena: {
         required: "Por favor ingrese una clave",
         minlength: "Tu clave debe tener al menos 5 caracteres"

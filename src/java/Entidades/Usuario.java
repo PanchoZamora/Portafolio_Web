@@ -29,7 +29,7 @@ public class Usuario {
     }
     
     // Constructor con parametros sin id
-    public Usuario(String nombre, String apellido, String rut, String correo, String contrasena) {
+    public Usuario(String nombre, String apellido, String rut,String correo, String contrasena) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.rut = rut;

@@ -21,13 +21,14 @@
         <link rel="icon" href="img/icono.png">
         <link rel="stylesheet" href="css/carousel.css"> 
         <link rel="stylesheet" href="css/signin.css">
+        <link rel="stylesheet" href="css/listacss.css">
     </head>
     <body>
         
         <hr>
         <div class="container bootstrap snippet">
             <div class="row">
-                <div class="col-sm-10"><h1>Usuario: ${sessionScope.nombreUsuario}&nbsp;${sessionScope.apellidoUsuario}</h1></div><br>
+                <div class="col-sm-10"><h1>Usuario (${sessionScope.idUsuario}): ${sessionScope.nombreUsuario}&nbsp;${sessionScope.apellidoUsuario}</h1></div><br>
                 <div class="col-sm-2"><a href="index.jsp" class="pull-right"><img title="Restauramte Siglo XXI" class="img-circle img-responsive" src="img/icono.png" height="50" width="60"></a></div>
             </div>
             <div class="row">
@@ -41,7 +42,7 @@
                     <br><br>
                     <a href="index.jsp" class="pull-left">Volver al inicio</a>
                 </div><!--/col-3-->
-                
+                <br><br>
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#reservas">Reservas</a></li>
@@ -53,11 +54,52 @@
                         <hr>
                        <h2>Reservas</h2>
                        <p>No hay reservas</p>
+                       <br>
+                       <a href="reserva.jsp" class="btn btn-success btn-xs"><b>+</b> Agregar reserva</a>
+                       <br>
+                       <div class="container">
+                            <div class="table-responsive row col-md-8 custyle">
+                            <table class="table table-striped custab">
+                            <thead>
+                            
+                                <tr>
+                                    <th>Fecha reserva</th>
+                                    <th>Hora Reserva</th>
+                                    <th>Mesa</th>
+                                    <th>Tipo de reserva</th>
+                                    <th class="text-center">Accion</th>
+                                </tr>
+                            </thead>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>News</td>
+                                        <td>News Cate</td>
+                                        <td>News Cate</td>
+                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Products</td>
+                                        <td>Main Products</td>
+                                        <td>Main Products</td>
+                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Blogs</td>
+                                        <td>Parent Blogs</td>
+                                        <td>Parent Blogs</td>
+                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
+                                    </tr>
+                            </table>
+                            </div>
+                        </div>    
                     </div><!--/tab-pane-->
                     
                     <div class="tab-pane" id="actualizar">
                         <hr>
-                        <form class="form" action="##" method="post" id="registrationForm">
+                        <form class="form" action="actualizarUsuarioServlet" method="post" id="registrationForm">
+                            <input type="hidden" name="idusuario" value="${sessionScope.idUsuario}">
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="nombre"><h4>Nombre</h4></label>
@@ -81,6 +123,12 @@
                                 <div class="col-xs-6">
                                     <label for="correo"><h4>Correo</h4></label>
                                     <input type="email" class="form-control" name="correo" id="correo" value="${sessionScope.correoUsuario}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="fono"><h4>Fono</h4></label>
+                                    <input type="number" class="form-control" name="fono" id="fono" value="${sessionScope.fonoCliente}">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -5,15 +5,11 @@
  */
 package Servlets;
 
-import Daos.*;
-import Entidades.Cliente;
-import Entidades.Mesa;
+import Daos.IUsuario;
+import Daos.UsuarioImplementacion;
 import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,19 +20,19 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author cetecom
+ * @author yanis
  */
-@WebServlet(name = "crearServlet", urlPatterns = {"/crearServlet"})
-public class crearServlet extends HttpServlet {
+@WebServlet(name = "actualizarUsuarioServlet", urlPatterns = {"/actualizarUsuarioServlet"})
+public class actualizarUsuarioServlet extends HttpServlet {
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session= request.getSession();
         PrintWriter out=response.getWriter();
         try {
             response.setContentType("text/html;charset=UTF-8");
+            int idUsuario = Integer.parseInt(request.getParameter("idusuario"));
             String nombre=request.getParameter("nombre");
             String apellido=request.getParameter("apellido");
             String rut=request.getParameter("rut");
@@ -44,62 +40,42 @@ public class crearServlet extends HttpServlet {
             String correo=request.getParameter("correo");
             String contrasena=request.getParameter("contrasena");
             Usuario usuario=new Usuario();
+            usuario.setIdUsuario(idUsuario);
             usuario.setNombre(nombre);
             usuario.setApellido(apellido);
             usuario.setRut(rut);
             usuario.setCorreo(correo);
             usuario.setContrasena(contrasena);
             IUsuario userDAO = new UsuarioImplementacion();
-            IReserva reservaDAO = new ReservaImplementacion();
-            int id = userDAO.crearUsuario(usuario, fono);
-            if(id != 0){
-                Cliente cliente = userDAO.datosCliente(id);
-                session.setAttribute("idUsuario", id);
+            if(userDAO.modificarUsuario(usuario, fono)){
+                session.setAttribute("idUsuario", usuario.getIdUsuario());
                 session.setAttribute("nombreUsuario", usuario.getNombre());
                 session.setAttribute("apellidoUsuario", usuario.getApellido());
                 session.setAttribute("rutUsuario", usuario.getRut());
-                session.setAttribute("fonoCliente", cliente.getFono());
-                session.setAttribute("idCliente", cliente.getIdCliente());
+                session.setAttribute("fonoCliente", fono);
                 session.setAttribute("correoUsuario", usuario.getCorreo());
                 session.setAttribute("claveUsuario", usuario.getContrasena());
-                List<Mesa> mesasDisponibles = reservaDAO.mesasDisponibles();
-                if(mesasDisponibles != null){
-                    session.setAttribute("mesasDisponibles",mesasDisponibles);
-                }
                 out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                 out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                 out.println("<script>");
                 out.println("$(document).ready(function(){");
-                out.println("swal('Bienvenido', 'Su usuario fue creado exitosamente', 'success');");
+                out.println("swal('Actualizado', 'Sus datos fueron actualizados exitosamente ', 'success');");
                 out.println("});");
                 out.println("</script>");
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.include(request, response);
-                
-            }else{
-                out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
-                out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
-                out.println("<script>");
-                out.println("$(document).ready(function(){");
-                out.println("swal('Error al crear usuario', 'No se pudo crear el nuevo usuario, intente nuevamente', 'error');");
-                out.println("});");
-                out.println("</script>");
-                RequestDispatcher rd = request.getRequestDispatcher("crearUsuario.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("perfil.jsp");
                 rd.include(request, response);
             }
+            
         } catch (Exception ex) {
             out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
             out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
             out.println("<script>");
             out.println("$(document).ready(function(){");
-            out.println("swal('Error al crear usuario', 'No se pudo crear el nuevo usuario, intente nuevamente', 'error');");
+            out.println("swal('Error', 'No se pudieron actualizar sus datos, intente nuevamente', 'error');");
             out.println("});");
             out.println("</script>");
-            RequestDispatcher rd = request.getRequestDispatcher("crearUsuario.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("perfil.jsp");
             rd.include(request, response);
         }
-        
     }
-
-
 }

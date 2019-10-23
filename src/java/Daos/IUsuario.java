@@ -5,6 +5,7 @@
  */
 package Daos;
 
+import Entidades.Cliente;
 import Entidades.Usuario;
 
 /**
@@ -12,7 +13,8 @@ import Entidades.Usuario;
  * @author cetecom
  */
 public interface IUsuario {
-     boolean crearUsuario(Usuario usuario );
-     void modificarUsuario(Usuario usuario);
+     int crearUsuario(Usuario usuario, int fono );
      Usuario buscarUsuario( String correo,String clave );
+     Cliente datosCliente (int idUsuario);
+     boolean modificarUsuario (Usuario usuario, int fono);
 }

@@ -86,16 +86,21 @@
                               <input type="text"  name="apellido" class="form-control" id="lastname" aria-describedby="emailHelp" placeholder="Ingrese apellido">
                            </div>
                             <div class="form-group">
-                              <label for="exampleInputEmail1">Rut</label>
+                              <label for="exampleInputEmail1">Rut <em><small>(sin puntos y con guion Ejem: 11111111-1)</small></em></label>
                               <input type="text" name="rut"  class="form-control" id="rut" aria-describedby="emailHelp" placeholder="Ingrese rut">
                            </div>
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Correo Electronico</label>
+                               <label for="exampleInputEmail1">Correo Electronico <em><small>(ejemplo@mail.com)</small></em></label>
                               <input type="email" name="correo"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingrese correo">
                            </div>
+                                
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Fono <small><em>(9 caracteres)</em></small></label>
+                              <input type="number" name="fono"  class="form-control" id="fono" aria-describedby="emailHelp" placeholder="Ingrese fono">
+                           </div>    
                             
                            <div class="form-group">
-                              <label for="exampleInputEmail1">Clave</label>
+                              <label for="exampleInputEmail1">Clave <small><em>(minimo 5 caracteres)</em></small></label>
                               <input type="password" name="contrasena" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Ingrese clave">
                            </div>
                            <div class="col-md-12 text-center mb-3">
