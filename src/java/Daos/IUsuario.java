@@ -14,5 +14,5 @@ import Entidades.Usuario;
 public interface IUsuario {
      boolean crearUsuario(Usuario usuario );
      void modificarUsuario(Usuario usuario);
-     Usuario verificarUsuario( String correo,String clave );
+     Usuario buscarUsuario( String correo,String clave );
 }

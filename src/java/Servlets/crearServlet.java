@@ -31,6 +31,7 @@ public class crearServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        PrintWriter out=response.getWriter();
         try {
             response.setContentType("text/html;charset=UTF-8");
             String nombre=request.getParameter("nombre");
@@ -38,24 +39,54 @@ public class crearServlet extends HttpServlet {
             String rut=request.getParameter("rut");
             String correo=request.getParameter("correo");
             String contrasena=request.getParameter("contrasena");
-            Usuario usuario=new Usuario(nombre, apellido, rut, correo, contrasena);
+            Usuario usuario=new Usuario();
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setRut(rut);
+            usuario.setCorreo(correo);
+            usuario.setContrasena(contrasena);
             IUsuario userDAO = new UsuarioImplementacion();
             String mensaje;
             if(userDAO.crearUsuario(usuario)){
-                mensaje="Cliente Creado"; 
                 session.setAttribute("correoUsuario", usuario.getCorreo());
                 session.setAttribute("nombreUsuario", usuario.getNombre());
                 session.setAttribute("apellidoUsuario", usuario.getApellido());
-                response.sendRedirect("index.jsp");
+                session.setAttribute("rutUsuario", usuario.getRut());
+                session.setAttribute("correoUsuario", usuario.getCorreo());
+                session.setAttribute("claveUsuario", usuario.getContrasena());
+                out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Bienvenido', 'Su usuario fue creado exitosamente', 'success');");
+                out.println("});");
+                out.println("</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.include(request, response);
+                
             }else{
-                mensaje="Error al crear el cliente";
+                out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+                out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+                out.println("<script>");
+                out.println("$(document).ready(function(){");
+                out.println("swal('Error al crear usuario', 'No se pudo crear el nuevo usuario, intente nuevamente', 'error');");
+                out.println("});");
+                out.println("</script>");
+                RequestDispatcher rd = request.getRequestDispatcher("crearUsuario.jsp");
+                rd.include(request, response);
             }
-            request.setAttribute("mensaje", mensaje); 
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/crearUsuario.jsp");
-            rd.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(crearServlet.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+            out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+            out.println("<script>");
+            out.println("$(document).ready(function(){");
+            out.println("swal('Error al crear usuario', 'No se pudo crear el nuevo usuario, intente nuevamente', 'error');");
+            out.println("});");
+            out.println("</script>");
+            RequestDispatcher rd = request.getRequestDispatcher("crearUsuario.jsp");
+            rd.include(request, response);
         }
+        
     }
 
 

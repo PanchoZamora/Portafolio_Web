@@ -36,8 +36,8 @@ public class UsuarioImplementacion implements IUsuario{
             cstmt.setString(1,usuario.getNombre());
             cstmt.setString(2,usuario.getApellido());
             cstmt.setString(3,usuario.getRut());
-            cstmt.setString(4, usuario.getContrasena());
-            cstmt.setString(5, usuario.getCorreo());
+            cstmt.setString(4,usuario.getCorreo());
+            cstmt.setString(5,usuario.getContrasena());
             cstmt.executeUpdate();
             creado = true;
             
@@ -53,18 +53,16 @@ public class UsuarioImplementacion implements IUsuario{
     }
 
     @Override
-    public Usuario verificarUsuario(String correo, String clave) {
+    public Usuario buscarUsuario(String correo, String clave) {
         Usuario usuario = null;
         try{
-        String query = "select * from usuario where correo=? and contrasena=? ";
+        String query = "select * from usuario where correo = ? and contrasena = ? ";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString(1,correo);
         stmt.setString(2,clave);
         ResultSet rs=stmt.executeQuery();
             if (rs.next()){
-                usuario.setCorreo(rs.getString("correo"));
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setApellido(rs.getString("apellido"));
+                usuario = new Usuario(rs.getString("nombre"), rs.getString("apellidos"), rs.getString("rut"), rs.getString("correo"), rs.getString("contrasena"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioImplementacion.class.getName()).log(Level.SEVERE, null, ex);

@@ -61,39 +61,33 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="nombre"><h4>Nombre</h4></label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre de usuario">
+                                    <input type="text" class="form-control" name="nombre" id="nombre" value="${sessionScope.nombreUsuario}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="apellido"><h4>Apellido</h4></label>
-                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="apellido de usuario">
+                                    <input type="text" class="form-control" name="apellido" id="apellido" value="${sessionScope.apellidoUsuario}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                       <label for="rut"><h4>Rut</h4></label>
-                                      <input type="text" class="form-control" name="rut" id="rut" placeholder="Ejemplo: 11.111.111-1">
+                                      <input type="text" class="form-control" name="rut" id="rut" value="${sessionScope.rutUsuario}">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="correo"><h4>Correo</h4></label>
-                                    <input type="email" class="form-control" name="correo" id="correo" placeholder="yo@email.com">
+                                    <input type="email" class="form-control" name="correo" id="correo" value="${sessionScope.correoUsuario}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="contrasena"><h4>Contraseña</h4></label>
-                                    <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="password">
+                                    <input type="password" class="form-control" name="contrasena" id="contrasena" value="${sessionScope.claveUsuario}">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                  <div class="col-xs-6">
-                                    <label for="contrasena2"><h4>Verificar Contraseña</h4></label>
-                                      <input type="password" class="form-control" name="contrasena2" id="password2" placeholder="password2">
-                                  </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">

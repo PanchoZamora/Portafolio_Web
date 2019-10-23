@@ -45,18 +45,24 @@ public class loginServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(loginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Usuario user = usuarioDAO.verificarUsuario(correo, contrasena);
+        Usuario user = usuarioDAO.buscarUsuario(correo, contrasena);
         if(user != null){
             session.setAttribute("correoUsuario", user.getCorreo());
             session.setAttribute("nombreUsuario", user.getNombre());
             session.setAttribute("apellidoUsuario", user.getApellido());
+            session.setAttribute("rutUsuario", user.getRut());
+            session.setAttribute("claveUsuario", user.getContrasena());
             response.sendRedirect("index.jsp");
         }else{
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('Usuario o contraseña incorrecta!');");
-            out.println("location='index.jsp';");
+            out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+            out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+            out.println("<script>");
+            out.println("$(document).ready(function(){");
+            out.println("swal('No se pudo iniciar sesion', 'Usuario o clave incorrecto', 'error');");
+            out.println("});");
             out.println("</script>");
-            
+            RequestDispatcher rd = request.getRequestDispatcher("crearUsuario.jsp");
+            rd.include(request, response);
         }
     }
 

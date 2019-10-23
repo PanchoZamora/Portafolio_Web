@@ -25,6 +25,7 @@
         <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="stylesheet" href="css/logincss.css">
+        
       </head>
 <body>
     <div class="container">
@@ -38,7 +39,7 @@
                                <h1>Iniciar Sesion</h1>
                        </div>
                     </div>
-                   <form action="" method="post" name="login">
+                        <form action="loginServlet" method="post" name="login">
                            <div class="form-group">
                               <label for="exampleInputEmail1">Correo Electronico</label>
                               <input type="email" name="correo"  class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingrese correo">
@@ -48,7 +49,7 @@
                               <input type="password" name="contrasena" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Ingrese clave">
                            </div>
                            <div class="col-md-12 text-center ">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Ingresar</button>
+                               <input type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" value="Ingresar">
                            </div>
                            <div class="col-md-12 ">
                               <div class="login-or">
@@ -75,7 +76,7 @@
                               <h1 >Registrate</h1>
                            </div>
                         </div>
-                        <form action="#" name="registration">
+                            <form action="crearServlet" method="post" name="registration">
                            <div class="form-group">
                               <label for="exampleInputEmail1">Nombre</label>
                               <input type="text"  name="nombre" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Ingrese nombre">
@@ -98,7 +99,7 @@
                               <input type="password" name="contrasena" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Ingrese clave">
                            </div>
                            <div class="col-md-12 text-center mb-3">
-                              <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registrarme</button>
+                               <input type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" value="Registrarme">
                            </div>
                            <div class="col-md-12 ">
                               <div class="form-group">
@@ -110,12 +111,13 @@
                                  <p class="text-center"><a href="index.jsp">Ir a la pagina</a></p>
                               </div>
                         </div>
-                            </div>
-                            
                         </form>
+
+                        </div>
+                            
                                  
                      </div>
-			</div>
+		</div>
 		</div>
       </div>   
     <script src="js/loginjs.js"></script>     
