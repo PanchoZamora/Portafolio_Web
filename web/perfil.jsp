@@ -52,48 +52,48 @@
                   <div class="tab-content">
                     <div class="tab-pane active" id="reservas">
                         <hr>
-                       <h2>Reservas</h2>
-                       <p>No hay reservas</p>
-                       <br>
-                       <a href="reserva.jsp" class="btn btn-success btn-xs"><b>+</b> Agregar reserva</a>
-                       <br>
-                       <div class="container">
-                            <div class="table-responsive row col-md-8 custyle">
-                            <table class="table table-striped custab">
-                            <thead>
-                            
-                                <tr>
-                                    <th>Fecha reserva</th>
-                                    <th>Hora Reserva</th>
-                                    <th>Mesa</th>
-                                    <th>Tipo de reserva</th>
-                                    <th class="text-center">Accion</th>
-                                </tr>
-                            </thead>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>News</td>
-                                        <td>News Cate</td>
-                                        <td>News Cate</td>
-                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Products</td>
-                                        <td>Main Products</td>
-                                        <td>Main Products</td>
-                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Blogs</td>
-                                        <td>Parent Blogs</td>
-                                        <td>Parent Blogs</td>
-                                        <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a></td>
-                                    </tr>
-                            </table>
-                            </div>
-                        </div>    
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.reservasCliente}">
+                                <br>
+                                <a href="reserva.jsp" class="btn btn-success btn-xs"><b>+</b> Agregar reserva</a>
+                                <br>
+                                <div class="container">
+                                    <div class="table-responsive row col-md-8 custyle">
+                                    <table class="table table-striped custab">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha reserva</th>
+                                            <th>Hora Reserva</th>
+                                            <th>Tipo de reserva</th>
+                                            <th>Mesa</th>
+                                            <th class="text-center">Accion</th>
+                                        </tr>
+                                    </thead>
+                                    <c:forEach items="${sessionScope.reservasCliente}" var="reserva">
+                                        <tr>
+                                            <td>${reserva.fechaReserva}</td>
+                                            <td>${reserva.horaReserva}</td>
+                                            <td>${reserva.tipoReserva}</td>
+                                            <td>${reserva.idmesa}</td>
+                                            <td class="text-center">
+                                                <a class='btn btn-info btn-xs' href="actualizarMesasServlet?idreserva=${reserva.idReserva}&idmesa=${reserva.idmesa}"><span class="glyphicon glyphicon-edit"></span> Editar</a> 
+                                                <a href="cancelarReservaServlet?idreserva=${reserva.idReserva}&idmesa=${reserva.idmesa}&idcliente=${sessionScope.idCliente}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Cancelar</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </table>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <h2>Reservas</h2>
+                                <p>No hay reservas</p>
+                                <br>
+                                <a href="reserva.jsp" class="btn btn-success btn-xs"><b>+</b> Agregar reserva</a>
+                                <br>
+                            </c:otherwise>
+                        </c:choose>
+                        
                     </div><!--/tab-pane-->
                     
                     <div class="tab-pane" id="actualizar">

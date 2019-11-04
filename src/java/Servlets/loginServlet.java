@@ -8,6 +8,7 @@ package Servlets;
 import Daos.*;
 import Entidades.Cliente;
 import Entidades.Mesa;
+import Entidades.Reserva;
 import Entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,9 +62,9 @@ public class loginServlet extends HttpServlet {
             session.setAttribute("rutUsuario", user.getRut());
             session.setAttribute("claveUsuario", user.getContrasena());
             List<Mesa> mesasDisponibles = reservaDAO.mesasDisponibles();
-            if(mesasDisponibles != null){
-                session.setAttribute("mesasDisponibles",mesasDisponibles);
-            }
+            session.setAttribute("mesasDisponibles",mesasDisponibles);
+            List<Reserva> reservasCliente = reservaDAO.reservasCliente(cliente.getIdCliente());
+            session.setAttribute("reservasCliente",reservasCliente);
             response.sendRedirect("index.jsp");
         }else{
             out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");

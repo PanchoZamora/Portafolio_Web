@@ -216,7 +216,7 @@
 
                     <div class='form-group'>
                         <div class="col-md-6 col-md-offset-2">
-                            <input class='btn btn-danger btn-block' type='submit' value='Enviar'>
+                            <button class='btn btn-danger btn-block' onclick="alert('Su mensaje fue enviado exitosamente');">Enviar</button>
                         </div>
                     </div>
                 </form>
@@ -238,7 +238,6 @@
       </footer>
 
     </div><!-- /.container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

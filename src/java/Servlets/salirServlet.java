@@ -33,8 +33,10 @@ public class salirServlet extends HttpServlet {
         session.removeAttribute("rutUsuario");
         session.removeAttribute("claveUsuario");
         session.removeAttribute("idUsuario");
+        session.removeAttribute("idCliente");
         session.removeAttribute("fonoCliente");
         session.removeAttribute("mesasDisponibles");
+        session.removeAttribute("reservasCliente");
         response.sendRedirect("index.jsp");
     }
 

@@ -16,4 +16,9 @@ import java.util.ArrayList;
 public interface IReserva {
     ArrayList<Mesa> mesasDisponibles();
     boolean crearReserva(Reserva reserva);
+    boolean editarReserva(Reserva reserva);
+    ArrayList<Reserva> reservasCliente(int idcliente);
+    boolean cancelarReserva(int idreserva, int idmesa);
+    ArrayList<Mesa> actualizarMesa(int idmesa);
+    ArrayList<Mesa> editarMesa(int idmesa);
 }

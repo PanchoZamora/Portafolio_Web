@@ -53,19 +53,19 @@
                                                                                 <span class="form-label">Horario de la reserva</span>
                                                                                 <select class="form-control" name="hora" required>
                                                                                         <option value="" selected hidden>Seleccione una hora</option>
-                                                                                        <option value="" >13:00</option>
-                                                                                        <option value="" >13:30</option>
-                                                                                        <option value="" >14:00</option>
-                                                                                        <option value="" >14:30</option>
-                                                                                        <option value="" >15:00</option>
-                                                                                        <option value="" >15:30</option>
+                                                                                        <option value="13:00" >13:00</option>
+                                                                                        <option value="13:30" >13:30</option>
+                                                                                        <option value="14:00" >14:00</option>
+                                                                                        <option value="14:30" >14:30</option>
+                                                                                        <option value="15:00" >15:00</option>
+                                                                                        <option value="15:30" >15:30</option>
                                                                                         <option style="font-size: 1pt; background-color: #000000;" disabled>&nbsp;</option>
-                                                                                        <option value="" >16:00</option>
-                                                                                        <option value="" >16:30</option>
-                                                                                        <option value="" >17:00</option>
-                                                                                        <option value="" >17:30</option>
-                                                                                        <option value="" >18:00</option>
-                                                                                        <option value="" >18:30</option>
+                                                                                        <option value="16:00" >16:00</option>
+                                                                                        <option value="16:30" >16:30</option>
+                                                                                        <option value="17:00" >17:00</option>
+                                                                                        <option value="17:30" >17:30</option>
+                                                                                        <option value="18:00" >18:00</option>
+                                                                                        <option value="18:30" >18:30</option>
                                                                                 </select>
                                                                                 <span class="select-arrow"></span>
                                                                         </div>
@@ -75,7 +75,7 @@
                                                                 <span class="form-label">Mesa</span>
                                                                 <select class="form-control" name="mesa" required>
                                                                     <c:choose>
-                                                                        <c:when test="${sessionScope.mesasDisponibles != null}">
+                                                                        <c:when test="${not empty sessionScope.mesasDisponibles}">
                                                                             <option value="" selected hidden>Seleccione mesa</option>
                                                                             <c:forEach items="${sessionScope.mesasDisponibles}" var="mesa">
                                                                                 <option value="${mesa.id}">Mesa: ${mesa.id} | Capacidad: ${mesa.capacidad}</option>
@@ -93,9 +93,9 @@
 								<select class="form-control" name="tipo" required>
                                                                     
 									<option value="" selected hidden>Seleccione tipo de reserva</option>
-									<option>Individual</option>
-									<option>Doble</option>
-                                                                        <option>Otro (3 o mas personas)</option>
+									<option value="individual">Individual</option>
+									<option value="doble">Doble</option>
+                                                                        <option value="otro">Otro (3 o mas personas)</option>
 								</select>
 								<span class="select-arrow"></span>
 							</div>

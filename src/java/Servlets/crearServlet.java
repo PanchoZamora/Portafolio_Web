@@ -63,9 +63,7 @@ public class crearServlet extends HttpServlet {
                 session.setAttribute("correoUsuario", usuario.getCorreo());
                 session.setAttribute("claveUsuario", usuario.getContrasena());
                 List<Mesa> mesasDisponibles = reservaDAO.mesasDisponibles();
-                if(mesasDisponibles != null){
-                    session.setAttribute("mesasDisponibles",mesasDisponibles);
-                }
+                session.setAttribute("mesasDisponibles",mesasDisponibles);
                 out.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
                 out.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
                 out.println("<script>");
